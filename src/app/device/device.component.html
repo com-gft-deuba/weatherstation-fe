@@ -1,1 +1,16 @@
-
+<mat-card>
+    <mat-card-title-group>
+        <mat-icon aria-hidden="false" aria-label="thermometer">{{ getIcon() }}</mat-icon>
+        <mat-card-title>{{ device.type }} v{{ device.version }}</mat-card-title>
+        <mat-card-subtitle>{{ device.hostname }}</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content>
+        <p>
+            {{ device.formatted }} <br>
+            {{ device.stamp.toLocaleDateString() }}
+        </p>
+    </mat-card-content>
+    <mat-card-footer>
+        {{ device.status }}
+    </mat-card-footer>
+</mat-card>

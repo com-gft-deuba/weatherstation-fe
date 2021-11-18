@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Device, deviceConfiguration, emptyDevice } from '../models/device';
+import { DeviceService } from '../services/device.service';
 
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.sass']
 })
-export class DeviceComponent implements OnInit {
+export class DeviceComponent {
 
-  constructor() { }
+  device: Device =  emptyDevice();
+  @Input() deviceType: string = "";
 
-  ngOnInit(): void {
+  constructor(deviceService: DeviceService) { 
+    this.device = deviceService.getDevice();
+  }
+
+  getIcon() {
+    return "device_thermostat"
   }
 
 }
