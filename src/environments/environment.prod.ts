@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: "http://thermometer/"
+  url: "http://127.0.0.1:30081/"
 };
