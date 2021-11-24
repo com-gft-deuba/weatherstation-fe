@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { Device, DeviceInfo, DeviceType } from '../models/device';
-import { mockedThermometer, mockedThermometerInfo } from '../models/device';
+import { Device, DeviceInfo } from '../models/device';
+
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
-  getDevice() {
-    return mockedThermometer;
+
+  constructor(private http: HttpClient) { }
+
+  getDevice(url: string): Observable<Device> {
+    return this.http.get<Device>(url);
   }
 
-  getDeviceInfo() {
-    return mockedThermometerInfo;
+  getDeviceInfo(url: string): Observable<DeviceInfo> {
+    return this.http.get<DeviceInfo>(url);
   }
 }
