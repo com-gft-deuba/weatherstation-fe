@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: "http://mysite-pilot.localgft.com/thermometer/"
+  url: "http://mysite-dev.localgft.com/thermometer/"
 };
