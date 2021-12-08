@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 
 import { Device, DeviceConfiguration, deviceConfiguration, DeviceInfo } from '../models/device';
 import { DeviceService } from '../services/device.service';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-device',
@@ -18,7 +19,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   subscription: Subscription | undefined;
   @Input() deviceType: string | undefined;
 
-  constructor(private deviceService: DeviceService) { };
+  constructor(private deviceService: DeviceService, private urlConfig: ConfigService) { };
 
   ngOnInit(): void {
     this.config = deviceConfiguration.find(
@@ -29,6 +30,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.subscription = source.subscribe(
       () => this.getDevice()
     );
+    console.log('URL config', this.urlConfig.config);
   }
 
   ngOnDestroy(): void {
@@ -38,8 +40,9 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   getDevice(): void {
-    if (this.config !== undefined) {
-      this.deviceService.getDevice(this.config.properties.url + this.config.properties.measure).subscribe(
+      if (this.config !== undefined) {
+      // this.deviceService.getDevice(this.config.properties.url + this.config.properties.measure).subscribe(
+      this.deviceService.getDevice(this.urlConfig.config.url + this.config.properties.measure).subscribe(
         (data: Device) => this.device = { ...data}
       );
     }
@@ -47,8 +50,9 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   getDeviceInfo(): void {
     if (this.config !== undefined) {
-      this.deviceService.getDeviceInfo(this.config.properties.url + this.config.properties.info).subscribe(
-        (data: DeviceInfo) => this.deviceInfo = { ...data}
+      // this.deviceService.getDeviceInfo(this.config.properties.url + this.config.properties.info).subscribe(
+      this.deviceService.getDeviceInfo(this.urlConfig.config.url + this.config.properties.info).subscribe(
+          (data: DeviceInfo) => this.deviceInfo = { ...data}
       );
     }
   }

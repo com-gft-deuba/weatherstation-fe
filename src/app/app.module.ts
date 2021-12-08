@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { APP_INITIALIZER } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +15,11 @@ import { AppComponent } from './app.component';
 import { DeviceComponent } from './device/device.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ConfigService } from './services/config.service';
+
+export const configFactory = (configService: ConfigService) => {
+  return () => configService.loadConfig();
+}
 
 @NgModule({
   declarations: [
@@ -33,6 +40,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     {
       provide: APP_BASE_HREF,
       useValue: '/' + (window.location.pathname.split('/')[1] || '')
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configFactory,
+      deps: [ConfigService],
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
