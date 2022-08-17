@@ -1,0 +1,1 @@
+SRCS := $(shell (find $(PATH_BASE)  -type f -not -path '*/node_modules/*' ) )

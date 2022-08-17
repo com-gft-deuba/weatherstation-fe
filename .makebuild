@@ -1,0 +1,8 @@
+$(BIN_DIR)/$(TARGET): $(SRCS) Makefile
+	@$(ECHO) "### ANGU/BIN   $(PROJECT).$(MODULE).$(COMPONENT) - $(DOCKER_VARIANT)"
+	@$(MKDIR) "$(BIN_DIR)" "$(OBJ_DIR)"
+	@if [ ! -z "$(DIST_DIR)" ] ; then $(CP) "$(BIN_DIR)/$(TARGET)" "$(DIST_DIR)" ; fi
+	@npm install -g @angular/cli@13.0.3
+	@npm install
+	@ng build --configuration $(VARIANT)
+
