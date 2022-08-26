@@ -1,5 +1,5 @@
 CUSTOMER ?= com.gft.tsbo
-PROJECT ?= com.gft.tsbo.source
+PROJECT ?= $(CUSTOMER).source
 MODULE ?= frontend
 COMPONENT ?= fe-weatherstation
 GIT_HOST ?= github.com
